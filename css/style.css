@@ -1,0 +1,670 @@
+@charset "UTF-8";
+/*!
+Auteur: Eddy Martin
+Description: Gabarit de base permettant d'explorer Sass et différents techniques CSS
+Version: 1.0.0
+License: GNU General Public License v2 or later
+*/
+/*--------------------------------------------------------------
+>>> LISTE DES FICHIERS SCSS IMPORTÉS 
+----------------------------------------------------------------
+# Variables
+# mixin
+# Layout
+# Element
+# Menu
+# Pied-page
+
+----------------------------------------------------------------
+# Variables
+--------------------------------------------------------------*/
+/* ------------------------------------------------------------
+# Mixin 
+--------------------------------------------------------------*/
+/* ----------------------------------------- */
+/* ------  Un premier exemple de mixin ----- */
+/* ----------------------------------------- */
+/* ---------------------------------------- */
+/* ---------------------------------------- */
+.modal-background {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: black;
+  opacity: 0.9;
+}
+
+/*
+  Le resultat CSS produit par SCSS
+
+  .modal-background {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        background: black;
+        opacity: 0.9;
+}
+
+*/
+/* ---------------------------------------------------------------------------------------------------------------------
+Réutilisabilité
+------------------------------------------------------------------------------------------------------------------------
+Le but principal d'un mixin est de rendre un ensemble de propriétés réutilisables.
+Comme les variables Sass (où vous définissez vos valeurs sur un seul emplacement), 
+les mixins Sass vous permettent de définir des propriétés sur un seul emplacement.
+Le mixin précédent peut être réutilisé dans d'autres règles:
+------------------------------------------------------------------------------------------------------------------------ */
+.modal-background {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.product-link {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.image-pattern {
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* ------------------------------------------------------------------------------  
+Paramètres
+--------------------------------------------------------------------------------- 
+Les mixins étant des fonctions on peut y intégrer des paramètres, 
+Par exemple, on peut généraliser la propriété border-radius pour 
+l'adapter à plusieurs navigateurs.
+-------------------------------------------------------------------------------- */
+.box {
+  border-radius: 3px;
+}
+
+/*----------------------------------------------------------------------------------- 
+Paramètres facultatifs
+-------------------------------------------------------------------------------------
+Si vous souhaitez qu'un paramètre ait une valeur par défaut tout en offrant la possibilité
+d'en définir un occasionnellement, vous pouvez créer des paramètres facultatifs:
+------------------------------------------------------------------------------------- */
+/* Utilisation du mixin */
+div.highlighter-rouge {
+  position: relative;
+}
+
+div.highlighter-rouge:before {
+  background: #aaa;
+  color: rgba(0, 0, 0, 0.5);
+  content: "Code";
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  height: 1rem;
+  left: 0;
+  letter-spacing: 0.1em;
+  line-height: 1rem;
+  padding: 0 0.5em;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0;
+}
+
+div.highlighter-rouge.css {
+  position: relative;
+}
+
+div.highlighter-rouge.css:before {
+  background: #0ff;
+  color: white;
+  content: "CSS";
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  height: 1rem;
+  left: 0;
+  letter-spacing: 0.1em;
+  line-height: 1rem;
+  padding: 0 0.5em;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0;
+}
+
+div.highlighter-rouge.scss {
+  position: relative;
+}
+
+div.highlighter-rouge.scss:before {
+  background: #c69;
+  color: white;
+  content: "SCSS";
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  height: 1rem;
+  left: 0;
+  letter-spacing: 0.1em;
+  line-height: 1rem;
+  padding: 0 0.5em;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0;
+}
+
+/*
+    Permet de définir un pseudo élément
+*/
+/*
+    Voici un exemple d'utilisation sans aucun argument 
+    (vous verrez également ce mixin utilisé dans certains de nos 
+    autres mixins ci-dessous également).
+*/
+div.mon_pseudo {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #aaa;
+}
+
+div.mon_pseudo::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  width: 1rem;
+  height: 1rem;
+  background-color: #0f0;
+}
+
+/*
+Ce mixin élimine tous les tracas de la création d'un HTML/CSS triangle 
+que vous verrez  apparaître dans la plupart des info-bulles traditionnelles, 
+le tout sans images, vous spécifiez simplement sa couleur, la taille que vous voulez, 
+la direction vers laquelle il pointera et c'est fait!
+*/
+.mon_triangle {
+  content: "";
+  display: block;
+  position: absolutr;
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #0f0;
+  margin-right: -10px;
+}
+
+/* ------------------------------------------------------------------------------ */
+/*  @content                                                                      */
+/* ------------------------------------------------------------------------------ */
+/* @content permet l'extension d'un Mixin. Nous pouvons passer un bloc de code css
+   à un Mixins avec l'utilisation de @content. En bref, @content rend cela possible.
+
+   grid() est un mixin qu'on va étendre avec @content
+*/
+/* @content permet d'intégrer du code de plus */
+/*
+Et maintenant, notre grille Mixin peut prendre du code CSS intégré. 
+Un exemple de cas d'utilisation est celui des media queries. 
+Voici un exemple
+*/
+/* ------------------------------------------------------------
+# Element 
+--------------------------------------------------------------*/
+/* Les éléments simples.  
+On définit ici des règles de styles générales qui peuvent être enrichies ailleur.
+Ces règles servent de bases  
+*/
+header {
+  color: #b19090;
+}
+
+header h1 {
+  font-size: 3em;
+  padding: 1rem 0 .1rem 0;
+  margin: 0;
+}
+
+header h2 {
+  font-size: 1em;
+  padding: 0 0 20px 0;
+  margin: 0;
+}
+
+@media screen and (min-width: 500px) {
+  header h1 {
+    font-size: 5em;
+    margin: 0;
+  }
+  header h2 {
+    font-size: 1em;
+    margin: 0;
+  }
+}
+
+/* ------------------------------------------------------------
+# Layout
+--------------------------------------------------------------*/
+body {
+  width: 100vw;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+header,
+nav,
+main,
+footer {
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+header {
+  z-index: 999;
+}
+
+header,
+footer {
+  background-color: #ba5252;
+}
+
+nav {
+  background-color: #652828;
+}
+
+main {
+  padding-top: 3em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  background-color: white;
+  color: #494545;
+}
+
+main section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+main section p {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 20%;
+          flex: 1 1 20%;
+}
+
+.global {
+  width: 95%;
+}
+
+@media screen and (min-width: 600px) {
+  .global {
+    width: 80%;
+  }
+}
+
+/* ------------------------------------------------------------
+# Menu
+--------------------------------------------------------------*/
+/* 
+le menu est contrôlé par une case à cocher
+l'état checked est testé par un le sélecteur suivant:
+*/
+#checkMenu:checked ~ ul {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  opacity: 1;
+  height: 180px;
+  z-index: 999;
+}
+
+/*
+#checkMenu:not(:checked)~ul {
+    height : 26px;  
+}
+*/
+#checkMenu:checked ~ #btnMenu {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  color: #0f0;
+}
+
+#checkMenu {
+  display: none;
+}
+
+#btnMenu {
+  display: block;
+  color: #fff;
+  font-size: 2em;
+  -webkit-transform-origin: 50% 60%;
+          transform-origin: 50% 60%;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  position: absolute;
+  width: 30px;
+  height: 32px;
+  -webkit-transition: -webkit-transform 1s;
+  transition: -webkit-transform 1s;
+  transition: transform 1s;
+  transition: transform 1s, -webkit-transform 1s;
+  left: 10px;
+  cursor: pointer;
+}
+
+#menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  top: 110px;
+  background-color: #522121;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  height: 40px;
+}
+
+#menu ul {
+  width: 100vw;
+  margin: 0;
+  padding-left: 20px;
+  margin-top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  list-style-type: none;
+  height: 0px;
+  background-color: #522121;
+  opacity: 0;
+}
+
+#menu ul li a {
+  text-decoration: none;
+  display: block;
+  padding: 3px;
+  color: #979090;
+}
+
+#menu ul li a:hover {
+  background-color: #ba5252;
+}
+
+@media screen and (min-width: 500px) {
+  #btnMenu {
+    display: none;
+  }
+  #menu {
+    position: static;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  #menu ul {
+    height: 26px;
+    margin: 0;
+    margin-left: 2%;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    opacity: 1;
+  }
+  #menu ul li {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    text-align: center;
+    vertical-align: center;
+  }
+  #menu ul li a {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    height: 26px;
+    padding-top: 11px;
+  }
+  #menu ul li a:hover {
+    background-color: #9c3d3d;
+  }
+}
+
+/*--------------------------------------------------------------
+# Pied-page 
+----------------------------------------------------------------*/
+/*
+mobile : 1 colonne
+tablette : 2 colonnes
+desktop : 4 colonnes
+*/
+#pied-page {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: #2f2c2c;
+}
+
+#pied-page section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+#pied-page ul {
+  padding: 10px;
+  list-style-type: none;
+  margin: 0;
+  padding: 10px 0 10px 0;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  border: 3px dotted #b54848;
+}
+
+#pied-page ul li {
+  padding: 3px;
+}
+
+@media screen and (min-width: 500px) {
+  #pied-page section {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-line-pack: center;
+        align-content: center;
+  }
+  #pied-page ul {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 40%;
+            flex: 1 1 40%;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  #pied-page section {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+  #pied-page ul {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 25%;
+            flex: 1 1 25%;
+  }
+}
+
+/*--------------------------------------------------------------
+# Bouton 
+----------------------------------------------------------------*/
+.btn {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-family: 'Poiret One', cursive;
+  font-size: 1.5em;
+}
+
+.btn-vert {
+  background: #2ecc71;
+}
+
+.btn-vert:hover {
+  background: #26ab5f;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.btn-vert:active {
+  background: #176437;
+}
+
+.btn-bleu {
+  background: #3498db;
+}
+
+.btn-bleu:hover {
+  background: #2383c4;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.btn-bleu:active {
+  background: #16527a;
+}
+
+.btn-jaune {
+  background: #f1c40f;
+}
+
+.btn-jaune:hover {
+  background: #cba50c;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.btn-jaune:active {
+  background: #796307;
+}
+
+.btn-rouge {
+  background: #772f2f;
+}
+
+.btn-rouge:hover {
+  background: #5a2323;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.btn-rouge:active {
+  background: #1c0b0b;
+}
+
+.bouton {
+  width: 100%;
+  height: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+@media screen and (min-width: 800px) {
+  .bouton {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+
+/*--------------------------------------------------------------*/
+/*# sourceMappingURL=style.css.map */
