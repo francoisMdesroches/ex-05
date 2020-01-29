@@ -1,0 +1,7 @@
+Pour initialiser  Git au dossier de travail (working directory)
+- git init
+Pour vérifier le status du dossier de travail
+- git status
+- git sta
+- git add .
+
