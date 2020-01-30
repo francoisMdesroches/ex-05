@@ -7,5 +7,5 @@ Pour vérifier le status du dossier de travail
 - git add all
 - git log 
 - git decoration
-
+- encore
 
