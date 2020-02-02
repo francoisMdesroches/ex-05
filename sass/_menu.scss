@@ -1,3 +1,30 @@
+/* Menu principale et barre de recherche */
+
+#chkRecherche:checked ~ #txtRecherche {
+    display : block;
+}
+
+
+#recherche {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    // border : 1px solid #fff;
+    height : 41px;
+
+
+    #txtRecherche {
+        display : none;
+        align-self: stretch;
+        min-height : 100%;
+        background-color: #f00;
+        border : none;
+
+    }
+}
+
+
 /* 
 le menu est contrôlé par une case à cocher
 l'état checked est testé par un le sélecteur suivant:
