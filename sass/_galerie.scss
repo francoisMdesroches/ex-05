@@ -6,7 +6,8 @@
     vertical-align: top;
     width: 100%;
 
-    // Loops to enumerate the classes for gallery columns.
+
+    // Boucle pour énumérer les classes de gallery columns
     @for $i from 2 through 9 {
         .gallery-columns-#{$i} & {
             max-width: calc((100% - 16px * #{ $i - 1 }) / #{ $i });

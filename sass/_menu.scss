@@ -165,11 +165,14 @@ l'état checked est testé par un le sélecteur suivant:
         }
     }
 }
+/*
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // ---------------------------------------------------------------- un premier point de rupture 
 // uniquement pour le menu
-@media screen and (min-width:600px) {
+*/
+
+@include media(600px){
     #btnMenu {
         display: none;
     }

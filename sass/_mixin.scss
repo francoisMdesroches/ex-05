@@ -210,13 +210,15 @@ Un exemple de cas d'utilisation est celui des media queries.
 Voici un exemple
 */
 
-@mixin small() {
-    @media only screen and (max-width: 320px) {
+@mixin media($largeur) {
+    @media only screen and (min-width: $largeur) {
         @content;
     }
 }
-
+/*
 @include small {
     // Le code css pour les petit écran serait inclus ici
 }
+
+*/
 

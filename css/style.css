@@ -14,13 +14,91 @@ License: GNU General Public License v2 or later
 # Element
 # Menu
 # Pied-page
+# Bouton
+# Gallerie
 
 ----------------------------------------------------------------
 # Variables
 --------------------------------------------------------------*/
 /* ------------------------------------------------------------
+# Extend
+-------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------ */
+/* @extend  
+/* ------------------------------------------------------------------------------ */
+/* Un  @extend permet d'hériter des propriétés CSS d'un autre sélecteur           */
+/* ------------------------------------------------------------------------------ */
+/*
+.small-uppercase{
+    color: lightslategrey;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    line-height: 12px;
+    text-transform: uppercase;
+  }
+  
+  .modal-background{
+    @extend .small-uppercase;
+  }
+  
+  .product-link{
+    @extend .small-uppercase;
+  }
+  
+  .image-pattern{
+    @extend .small-uppercase;
+  }
+  */
+/*
+  .small-uppercase,
+  .modal-background,
+  .product-link,
+  .image-pattern{
+    color: lightslategrey;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    line-height: 12px;
+    text-transform: uppercase;
+  }
+  */
+/* ---------------------------------------------------------------------------- */
+/* Différence avec les mixins                                                   */
+/* ---------------------------------------------------------------------------- */
+/* 
+Il y a 2 différences:
+La règle @extend n'a pas de paramètres. Les mixins en ont.
+La règle @extend combine des sélecteurs. Les mixins non.
+*/
+/*
+La liste des propriétés est simplement répétée autant de fois que le 
+@include small-uppercase () est appelé.
+
+Un  @extend est plus efficace, car il n'écrit les propriétés 
+communes qu'une seule fois.
+On peut optimiser @extend avec un «placeholder»
+en précédent notre extension avec «%»
+*/
+.modal-background, .product-link, .image-pattern {
+  color: lightslategrey;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  line-height: 12px;
+  text-transform: uppercase;
+}
+
+.modal-background,
+.product-link,
+.image-pattern {
+  color: lightslategrey;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  line-height: 12px;
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------------------
 # Mixin 
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 /* ----------------------------------------- */
 /* ------  Un premier exemple de mixin ----- */
 /* ----------------------------------------- */
@@ -221,9 +299,15 @@ Et maintenant, notre grille Mixin peut prendre du code CSS intégré.
 Un exemple de cas d'utilisation est celui des media queries. 
 Voici un exemple
 */
+/*
+@include small {
+    // Le code css pour les petit écran serait inclus ici
+}
+
+*/
 /* ------------------------------------------------------------
 # Element 
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 /* Les éléments simples.  
 On définit ici des règles de styles générales qui peuvent être enrichies ailleur.
 Ces règles servent de bases  
@@ -257,7 +341,7 @@ header h2 {
 
 /* ------------------------------------------------------------
 # Layout
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 body {
   width: 100vw;
   min-height: 100vh;
@@ -349,7 +433,7 @@ main section p {
 
 /* ------------------------------------------------------------
 # Menu
---------------------------------------------------------------*/
+-------------------------------------------------------------- */
 /* Menu principale et barre de recherche */
 #chkRecherche:checked ~ #txtRecherche {
   display: block;
@@ -526,7 +610,13 @@ l'état checked est testé par un le sélecteur suivant:
   color: #fff;
 }
 
-@media screen and (min-width: 600px) {
+/*
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// ---------------------------------------------------------------- un premier point de rupture 
+// uniquement pour le menu
+*/
+@media only screen and (min-width: 600px) {
   #btnMenu {
     display: none;
   }
@@ -653,7 +743,7 @@ l'état checked est testé par un le sélecteur suivant:
 
 /*--------------------------------------------------------------
 # Pied-page 
-----------------------------------------------------------------*/
+---------------------------------------------------------------- */
 /*
 mobile : 1 colonne
 tablette : 2 colonnes
@@ -681,6 +771,7 @@ desktop : 4 colonnes
 }
 
 #pied-page ul {
+  width: 50%;
   padding: 10px;
   list-style-type: none;
   margin: 0;
@@ -690,6 +781,90 @@ desktop : 4 colonnes
           flex: 1;
   text-align: center;
   border: 3px dotted #b54848;
+}
+
+#pied-page ul:nth-of-type(1) {
+  position: relative;
+}
+
+#pied-page ul:nth-of-type(1):before {
+  background: #0ff;
+  color: white;
+  content: "Un";
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  height: 1rem;
+  left: 0;
+  letter-spacing: 0.1em;
+  line-height: 1rem;
+  padding: 0 0.5em;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0;
+}
+
+#pied-page ul:nth-of-type(2) {
+  position: relative;
+}
+
+#pied-page ul:nth-of-type(2):before {
+  background: #295050;
+  color: white;
+  content: "Deux";
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  height: 1rem;
+  left: 0;
+  letter-spacing: 0.1em;
+  line-height: 1rem;
+  padding: 0 0.5em;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0;
+}
+
+#pied-page ul:nth-of-type(3) {
+  position: relative;
+}
+
+#pied-page ul:nth-of-type(3):before {
+  background: #2e1206;
+  color: white;
+  content: "Trois";
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  height: 1rem;
+  left: 0;
+  letter-spacing: 0.1em;
+  line-height: 1rem;
+  padding: 0 0.5em;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0;
+}
+
+#pied-page ul:nth-of-type(4) {
+  position: relative;
+}
+
+#pied-page ul:nth-of-type(4):before {
+  background: #416b28;
+  color: white;
+  content: "Quatre";
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  height: 1rem;
+  left: 0;
+  letter-spacing: 0.1em;
+  line-height: 1rem;
+  padding: 0 0.5em;
+  position: absolute;
+  text-transform: uppercase;
+  top: 0;
 }
 
 #pied-page ul li {
@@ -740,8 +915,8 @@ desktop : 4 colonnes
 
 /*--------------------------------------------------------------
 # Bouton 
-----------------------------------------------------------------*/
-.btn {
+---------------------------------------------------------------- */
+.btn, .btn-vert, .btn-bleu, .btn-jaune, .btn-rouge {
   display: block;
   color: white;
   text-decoration: none;
