@@ -5,6 +5,7 @@ body {
     // le layout est entièrement flexbox
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 header,
@@ -16,7 +17,7 @@ footer {
     justify-content: center;
 }
 header {
-    z-index: 999;
+    //z-index: 999;
    // flex:1;
 }
 

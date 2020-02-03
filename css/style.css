@@ -244,7 +244,7 @@ header h2 {
   margin: 0;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 600px) {
   header h1 {
     font-size: 5em;
     margin: 0;
@@ -269,6 +269,7 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  overflow-x: hidden;
 }
 
 header,
@@ -282,10 +283,6 @@ footer {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-}
-
-header {
-  z-index: 999;
 }
 
 header,
@@ -356,6 +353,20 @@ main section p {
 /* Menu principale et barre de recherche */
 #chkRecherche:checked ~ #txtRecherche {
   display: block;
+  z-index: 9;
+  color: #fff;
+}
+
+#chkRecherche:checked ~ #btnRecherche:after {
+  content: "X";
+  font-size: 1.3em;
+  font-weight: bolder;
+  padding: 12px;
+  color: #fff;
+}
+
+#chkRecherche {
+  display: none;
 }
 
 #recherche {
@@ -369,17 +380,44 @@ main section p {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  height: 41px;
+  height: 38px;
+  width: 100%;
 }
 
 #recherche #txtRecherche {
+  margin-left: 12%;
+  padding-left: 40px;
   display: none;
   -ms-flex-item-align: stretch;
       -ms-grid-row-align: stretch;
       align-self: stretch;
   min-height: 100%;
-  background-color: #f00;
+  background-color: #471c1c;
   border: none;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 200px;
+          flex: 1 1 200px;
+  opacity: .8;
+  z-index: -1;
+}
+
+#recherche #btnRecherche {
+  position: relative;
+  z-index: 999;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 40px;
+          flex: 0 0 40px;
+  color: #fff;
+  padding-right: 10px;
+}
+
+#recherche #btnRecherche:after {
+  content: "\1F50E";
+  top: 0;
+  bottom: 0px;
+  right: 0;
+  left: 0;
+  font-size: 1.2em;
 }
 
 /* 
@@ -387,20 +425,13 @@ le menu est contrôlé par une case à cocher
 l'état checked est testé par un le sélecteur suivant:
 */
 #checkMenu:checked ~ ul {
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  opacity: 1;
-  height: 180px;
-  z-index: 999;
+  max-height: 200px;
 }
 
-/*
-#checkMenu:not(:checked)~ul {
-    height : 26px;  
+#checkMenu:checked ~ ul > li {
+  opacity: 1;
 }
-*/
+
 #checkMenu:checked ~ #btnMenu {
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
@@ -409,9 +440,11 @@ l'état checked est testé par un le sélecteur suivant:
 
 #checkMenu {
   display: none;
+  z-index: 1;
 }
 
 #btnMenu {
+  z-index: 1;
   display: block;
   color: #fff;
   font-size: 2em;
@@ -423,7 +456,7 @@ l'état checked est testé par un le sélecteur suivant:
           user-select: none;
   position: absolute;
   width: 30px;
-  height: 32px;
+  max-height: 32px;
   -webkit-transition: -webkit-transform 1s;
   transition: -webkit-transform 1s;
   transition: transform 1s;
@@ -436,8 +469,7 @@ l'état checked est testé par un le sélecteur suivant:
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: absolute;
-  top: 110px;
+  position: relative;
   background-color: #522121;
   -webkit-box-align: start;
       -ms-flex-align: start;
@@ -447,9 +479,10 @@ l'état checked est testé par un le sélecteur suivant:
 
 #menu ul {
   width: 100vw;
-  margin: 0;
+  margin-left: -10px;
   padding-left: 20px;
-  margin-top: 40px;
+  padding-bottom: 9px;
+  margin-top: 32px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -458,58 +491,160 @@ l'état checked est testé par un le sélecteur suivant:
       -ms-flex-direction: column;
           flex-direction: column;
   list-style-type: none;
-  height: 0px;
+  max-height: 0px;
+  height: auto;
+  -webkit-transition: max-height 1s;
+  transition: max-height 1s;
   background-color: #522121;
+}
+
+#menu ul li {
   opacity: 0;
+  -webkit-transition: opacity .5s;
+  transition: opacity .5s;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+#menu ul li:nth-of-type(1) {
+  padding-top: 10px;
+}
+
+#menu ul li:last-child {
+  padding-bottom: 15px;
 }
 
 #menu ul li a {
   text-decoration: none;
   display: block;
-  padding: 3px;
+  padding: 6px 3px 3px 30px;
   color: #979090;
 }
 
 #menu ul li a:hover {
   background-color: #ba5252;
+  color: #fff;
 }
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 600px) {
   #btnMenu {
     display: none;
   }
+  #recherche {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 100px;
+            flex: 1 1 100px;
+  }
+  #recherche #txtRecherche {
+    width: 80%;
+    margin-left: 5%;
+    margin-right: 0%;
+    padding-left: 10pxpx;
+    display: none;
+    -ms-flex-item-align: stretch;
+        -ms-grid-row-align: stretch;
+        align-self: stretch;
+    border: none;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    opacity: .8;
+    z-index: -1;
+    height: 100%;
+  }
+  #recherche #btnRecherche {
+    margin-right: 10%;
+  }
   #menu {
-    position: static;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 100%;
+    position: static;
   }
   #menu ul {
-    height: 26px;
+    /*
+                //margin-left :10%;
+                //margin : 0 auto;
+                //border : 1px solid #fff;
+                */
+    width: 80%;
+    position: static;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    max-height: 31px;
     margin: 0;
-    margin-left: 2%;
+    height: 40px;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
     opacity: 1;
+    z-index: 1;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 0px;
+            flex: 1 1 0px;
+    overflow: hidden;
   }
   #menu ul li {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-    text-align: center;
-    vertical-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    opacity: 1;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 17%;
+            flex: 0 1 17%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  #menu ul li:nth-of-type(1) {
+    padding-top: 0px;
+  }
+  #menu ul li:last-child {
+    padding-bottom: 0px;
   }
   #menu ul li a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
     -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
+        -ms-flex: 1 1 100px;
+            flex: 1 1 100px;
     height: 26px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     padding-top: 11px;
+    z-index: 1;
   }
   #menu ul li a:hover {
     background-color: #9c3d3d;
