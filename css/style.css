@@ -1190,5 +1190,42 @@ img {
   overflow: hidden;
 }
 
+/*--------------------------------------------------------------
+# Anim Entete 
+---------------------------------------------------------------- */
+@-webkit-keyframes animEntete {
+  from {
+    -webkit-transform: translateX(1000px);
+            transform: translateX(1000px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    color: blue;
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    color: yellow;
+  }
+}
+@keyframes animEntete {
+  from {
+    -webkit-transform: translateX(1000px);
+            transform: translateX(1000px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    color: blue;
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    color: yellow;
+  }
+}
+
+.animEntete {
+  -webkit-animation: animEntete 1s;
+          animation: animEntete 1s;
+}
+
 /*-------------------------------------------------------------- */
 /*# sourceMappingURL=style.css.map */

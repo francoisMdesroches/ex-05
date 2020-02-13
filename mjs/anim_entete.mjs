@@ -1,11 +1,13 @@
 export class anim_entete{
 
-    constructor(){
-
+    constructor(elmEntete){
+        this.elmEntete = elmEntete;
     }
 
     anim(){
-        console.log("animation");
+        let elmTitre = this.elmEntete.children[0];
+        this.elmEntete.children[1].classList.add('animEntete');
+        elmTitre.classList.add('animEntete')
     }
 
 }

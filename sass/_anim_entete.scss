@@ -1,0 +1,15 @@
+@keyframes animEntete{
+    from{
+        transform: translateX(1000px);
+        animation-timing-function: ease-in;
+        color:blue;
+    }
+    to{
+        transform: translateX(0);
+        color:yellow;
+    }
+}
+
+.animEntete {
+    animation: animEntete 1s;
+}
