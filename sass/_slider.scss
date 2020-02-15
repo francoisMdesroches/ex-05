@@ -63,11 +63,13 @@ scroll-snap-type: mandatory;
         transform: scale(1);
         transition: transform 0.5s;
         position: relative;
-
         display: flex;
         justify-content: center;
         align-items: center;
         font-size: 100px;
+        background-size: 50%;
+       background-position: bottom;
+        background-repeat: no-repeat;
         h2 {
             font-size: 1.5rem;
         }
